@@ -1,55 +1,42 @@
-'use strict';
-
-const fs = require('fs');
-
-process.stdin.resume();
-process.stdin.setEncoding('utf-8');
-
-let inputString = '';
-let currentLine = 0;
-
-process.stdin.on('data', function(inputStdin) {
-    inputString += inputStdin;
-});
-
-process.stdin.on('end', function() {
-    inputString = inputString.split('\n');
-
-    main();
-});
-
-function readLine() {
-    return inputString[currentLine++];
-}
-
 /*
  * Complete the 'rotLeft' function below.
- *
+ 
  * The function is expected to return an INTEGER_ARRAY.
  * The function accepts following parameters:
  *  1. INTEGER_ARRAY a
  *  2. INTEGER d
- */
+ 
+*/
+
+/* 
+
+* Sample Input:
+* a d
+* 1 2 3 4 5
+
+* Sample Output:
+* 5 1 2 3 4
+
+*/
+
+
+
+const example = {
+    a: [1, 2, 3, 4, 5],
+    d: 4
+}
 
 function rotLeft(a, d) {
-    // Write your code here
-    
+    console.log('Get back half from d', a.slice(d)) // Get the back half from d, should only get 5
+    console.log('The slice of the front portion', a.slice(0, d)) // Get the front portion from, index 0 to d 
+    let newArray = [...a.slice(d), ...a.slice(0, d)]
+    return newArray
 }
 
-function main() {
-    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+// Slice the array 
+// Get the back half from d, should only get 5
+// Get the front portion from, index 0 to d 
+// Spread operator remaining array of d slice, and then spread operator front portion to the back
+// Array has now moved D to the left 
 
-    const firstMultipleInput = readLine().replace(/\s+$/g, '').split(' ');
-
-    const n = parseInt(firstMultipleInput[0], 10);
-
-    const d = parseInt(firstMultipleInput[1], 10);
-
-    const a = readLine().replace(/\s+$/g, '').split(' ').map(aTemp => parseInt(aTemp, 10));
-
-    const result = rotLeft(a, d);
-
-    ws.write(result.join(' ') + '\n');
-
-    ws.end();
-}
+console.log('Answer:', rotLeft(example.a, example.d))
